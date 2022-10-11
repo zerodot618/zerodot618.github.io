@@ -40,6 +40,12 @@ module.exports = {
                     { text: '工具', link: '/other/tools/' },
                 ]
             },
+            {
+                text: '随笔', items: [
+                    { text: '读书笔记', link: '/essays/books/' },
+                    { text: '个人随笔', link: '/essays/mine/' }
+                ]
+            },
             { text: '关于', link: '/about/' },
         ],
         sidebar: {
@@ -100,7 +106,24 @@ module.exports = {
                         { text: '文集链接', link: '/architect/resource/文集链接' },
                     ]
                 },
-            ]
+            ],
+            '/essays/books/': [
+                {
+                    text: '读书笔记',
+                    items: [
+                        { text: '首页', link: '/essays/books/' },
+                        { text: '《奔跑吧，程序员》', link: '/essays/books/奔跑吧-程序员' },
+                    ]
+                },
+            ],
+            '/essays/mine/': [
+                {
+                    text: '个人随笔',
+                    items: [
+                        { text: '首页', link: '/essays/mine/' },
+                    ]
+                },
+            ],
         },
         socialLinks: [
             { icon: "github", link: "https://github.com/zerodot618" },
