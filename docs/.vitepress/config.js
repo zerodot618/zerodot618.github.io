@@ -59,7 +59,22 @@ module.exports = {
                         { text: '资料链接', link: '/golang/resource/资料链接' }
                     ]
                 },
-            ]
+            ],
+            '/php/': [
+                {
+                    text: 'PHP',
+                    items: [
+                        { text: '首页', link: '/php/' },
+                    ]
+                },
+                {
+                    text: '资源',
+                    items: [
+                        { text: '资料链接', link: '/php/resource/资料链接' },
+                        { text: 'Github开源', link: '/php/resource/Github开源' },
+                    ]
+                },
+            ],
         },
         socialLinks: [
             { icon: "github", link: "https://github.com/zerodot618" },
