@@ -45,8 +45,19 @@ module.exports = {
         sidebar: {
             '/golang/': [
                 {
-                    text: '链接',
-                    items: [{ text: 'Golang', link: '/golang/' },]
+                    text: 'Golang',
+                    items: [
+                        { text: '首页', link: '/golang/' },
+                        { text: 'Go 语言简明教程', link: '/golang/go-language-concise-course/post' },
+                    ]
+                },
+                {
+                    text: '资源',
+                    items: [
+                        { text: '实战归纳', link: '/golang/resource/实战归纳' },
+                        { text: '腾讯云文集', link: '/golang/resource/腾讯云文集' },
+                        { text: '资料链接', link: '/golang/resource/资料链接' }
+                    ]
                 },
             ]
         },
