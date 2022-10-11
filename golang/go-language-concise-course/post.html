@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Go 语言介绍 | ZeroDot618</title>
+    <meta name="description" content="ZeroDot618">
+    <link rel="stylesheet" href="/assets/style.a0d34afc.css">
+    <link rel="modulepreload" href="/assets/app.4a48495f.js">
+    <link rel="modulepreload" href="/assets/golang_go-language-concise-course_post.md.37aa6f64.lean.js">
+    
+    <link rel="icon" href="/img/logo.jpg">
+  </head>
+  <body>
+    <div id="app"><div class="Layout" data-v-c6a644e1><!--[--><!--]--><!--[--><span tabindex="-1" data-v-151f2593></span><a href="#VPContent" class="VPSkipLink visually-hidden" data-v-151f2593> Skip to content </a><!--]--><!----><header class="VPNav" data-v-c6a644e1 data-v-a71a30f1><div class="VPNavBar has-sidebar" data-v-a71a30f1 data-v-6f1d18b5><div class="container" data-v-6f1d18b5><div class="VPNavBarTitle has-sidebar" data-v-6f1d18b5 data-v-d5925166><a class="title" href="/" data-v-d5925166><!--[--><!--]--><!--[--><img class="VPImage logo" src="/img/logo.jpg" alt data-v-8e4dd84f><!--]--><!--[-->ZeroDot618<!--]--><!--[--><!--]--></a></div><div class="content" data-v-6f1d18b5><!--[--><!--]--><!----><nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu" data-v-6f1d18b5 data-v-f83db6ba><span id="main-nav-aria-label" class="visually-hidden" data-v-f83db6ba>Main Navigation</span><!--[--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/" data-v-f83db6ba data-v-47a2263e data-v-3c355974><!--[-->首页<!--]--><!----></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/golang/" data-v-f83db6ba data-v-47a2263e data-v-3c355974><!--[-->Golang<!--]--><!----></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/php/" data-v-f83db6ba data-v-47a2263e data-v-3c355974><!--[-->PHP<!--]--><!----></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/architect/" data-v-f83db6ba data-v-47a2263e data-v-3c355974><!--[-->架构<!--]--><!----></a><!--]--><!--[--><div class="VPFlyout VPNavBarMenuGroup" data-v-f83db6ba data-v-6ffb57d3><button type="button" class="button" aria-haspopup="true" aria-expanded="false" data-v-6ffb57d3><span class="text" data-v-6ffb57d3><!----> 云原生 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" viewbox="0 0 24 24" class="text-icon" data-v-6ffb57d3><path d="M12,16c-0.3,0-0.5-0.1-0.7-0.3l-6-6c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l5.3,5.3l5.3-5.3c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-6,6C12.5,15.9,12.3,16,12,16z"></path></svg></span></button><div class="menu" data-v-6ffb57d3><div class="VPMenu" data-v-6ffb57d3 data-v-1c5d0cfc><div class="items" data-v-1c5d0cfc><!--[--><!--[--><div class="VPMenuLink" data-v-1c5d0cfc data-v-e8e0fb1d><a class="VPLink link" href="/cloud/devops/" data-v-e8e0fb1d data-v-3c355974><!--[-->Devops<!--]--><!----></a></div><!--]--><!--[--><div class="VPMenuLink" data-v-1c5d0cfc data-v-e8e0fb1d><a class="VPLink link" href="/cloud/docker/" data-v-e8e0fb1d data-v-3c355974><!--[-->Docker<!--]--><!----></a></div><!--]--><!--]--></div><!--[--><!--]--></div></div></div><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/frontend/" data-v-f83db6ba data-v-47a2263e data-v-3c355974><!--[-->前端<!--]--><!----></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/blockchain/" data-v-f83db6ba data-v-47a2263e data-v-3c355974><!--[-->区块链<!--]--><!----></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/python/" data-v-f83db6ba data-v-47a2263e data-v-3c355974><!--[-->Python<!--]--><!----></a><!--]--><!--[--><div class="VPFlyout VPNavBarMenuGroup" data-v-f83db6ba data-v-6ffb57d3><button type="button" class="button" aria-haspopup="true" aria-expanded="false" data-v-6ffb57d3><span class="text" data-v-6ffb57d3><!----> 其他 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" viewbox="0 0 24 24" class="text-icon" data-v-6ffb57d3><path d="M12,16c-0.3,0-0.5-0.1-0.7-0.3l-6-6c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l5.3,5.3l5.3-5.3c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-6,6C12.5,15.9,12.3,16,12,16z"></path></svg></span></button><div class="menu" data-v-6ffb57d3><div class="VPMenu" data-v-6ffb57d3 data-v-1c5d0cfc><div class="items" data-v-1c5d0cfc><!--[--><!--[--><div class="VPMenuLink" data-v-1c5d0cfc data-v-e8e0fb1d><a class="VPLink link" href="/other/sql/" data-v-e8e0fb1d data-v-3c355974><!--[-->数据库<!--]--><!----></a></div><!--]--><!--[--><div class="VPMenuLink" data-v-1c5d0cfc data-v-e8e0fb1d><a class="VPLink link" href="/other/hardware/" data-v-e8e0fb1d data-v-3c355974><!--[-->硬件<!--]--><!----></a></div><!--]--><!--[--><div class="VPMenuLink" data-v-1c5d0cfc data-v-e8e0fb1d><a class="VPLink link" href="/other/tools/" data-v-e8e0fb1d data-v-3c355974><!--[-->工具<!--]--><!----></a></div><!--]--><!--]--></div><!--[--><!--]--></div></div></div><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/about/" data-v-f83db6ba data-v-47a2263e data-v-3c355974><!--[-->关于<!--]--><!----></a><!--]--><!--]--></nav><!----><!----><div class="VPSocialLinks VPNavBarSocialLinks social-links" data-v-6f1d18b5 data-v-738bef5a data-v-f6988cfb><!--[--><a class="VPSocialLink" href="https://github.com/zerodot618" target="_blank" rel="noopener" data-v-f6988cfb data-v-e57698f6><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a><!--]--></div><div class="VPFlyout VPNavBarExtra extra" data-v-6f1d18b5 data-v-e4361c82 data-v-6ffb57d3><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="extra navigation" data-v-6ffb57d3><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" viewbox="0 0 24 24" class="icon" data-v-6ffb57d3><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="5" cy="12" r="2"></circle></svg></button><div class="menu" data-v-6ffb57d3><div class="VPMenu" data-v-6ffb57d3 data-v-1c5d0cfc><!----><!--[--><!--[--><!----><!----><div class="group" data-v-e4361c82><div class="item social-links" data-v-e4361c82><div class="VPSocialLinks social-links-list" data-v-e4361c82 data-v-f6988cfb><!--[--><a class="VPSocialLink" href="https://github.com/zerodot618" target="_blank" rel="noopener" data-v-f6988cfb data-v-e57698f6><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a><!--]--></div></div></div><!--]--><!--]--></div></div></div><!--[--><!--]--><button type="button" class="VPNavBarHamburger hamburger" aria-label="mobile navigation" aria-expanded="false" aria-controls="VPNavScreen" data-v-6f1d18b5 data-v-e5dd9c1c><span class="container" data-v-e5dd9c1c><span class="top" data-v-e5dd9c1c></span><span class="middle" data-v-e5dd9c1c></span><span class="bottom" data-v-e5dd9c1c></span></span></button></div></div></div><!----></header><div class="VPLocalNav" data-v-c6a644e1 data-v-aac27d5e><button class="menu" aria-expanded="false" aria-controls="VPSidebarNav" data-v-aac27d5e><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" viewbox="0 0 24 24" class="menu-icon" data-v-aac27d5e><path d="M17,11H3c-0.6,0-1-0.4-1-1s0.4-1,1-1h14c0.6,0,1,0.4,1,1S17.6,11,17,11z"></path><path d="M21,7H3C2.4,7,2,6.6,2,6s0.4-1,1-1h18c0.6,0,1,0.4,1,1S21.6,7,21,7z"></path><path d="M21,15H3c-0.6,0-1-0.4-1-1s0.4-1,1-1h18c0.6,0,1,0.4,1,1S21.6,15,21,15z"></path><path d="M17,19H3c-0.6,0-1-0.4-1-1s0.4-1,1-1h14c0.6,0,1,0.4,1,1S17.6,19,17,19z"></path></svg><span class="menu-text" data-v-aac27d5e>Menu</span></button><a class="top-link" href="#" data-v-aac27d5e> Return to top </a></div><aside class="VPSidebar" data-v-c6a644e1 data-v-f332cb62><nav class="nav" id="VPSidebarNav" aria-labelledby="sidebar-aria-label" tabindex="-1" data-v-f332cb62><span class="visually-hidden" id="sidebar-aria-label" data-v-f332cb62> Sidebar Navigation </span><!--[--><div class="group" data-v-f332cb62><section class="VPSidebarGroup" data-v-f332cb62 data-v-35f99ef5><div class="title" data-v-35f99ef5><h2 class="title-text" data-v-35f99ef5>链接</h2><div class="action" data-v-35f99ef5><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 24 24" class="icon minus" data-v-35f99ef5><path d="M19,2H5C3.3,2,2,3.3,2,5v14c0,1.7,1.3,3,3,3h14c1.7,0,3-1.3,3-3V5C22,3.3,20.7,2,19,2zM20,19c0,0.6-0.4,1-1,1H5c-0.6,0-1-0.4-1-1V5c0-0.6,0.4-1,1-1h14c0.6,0,1,0.4,1,1V19z"></path><path d="M16,11H8c-0.6,0-1,0.4-1,1s0.4,1,1,1h8c0.6,0,1-0.4,1-1S16.6,11,16,11z"></path></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="icon plus" data-v-35f99ef5><path d="M19,2H5C3.3,2,2,3.3,2,5v14c0,1.7,1.3,3,3,3h14c1.7,0,3-1.3,3-3V5C22,3.3,20.7,2,19,2z M20,19c0,0.6-0.4,1-1,1H5c-0.6,0-1-0.4-1-1V5c0-0.6,0.4-1,1-1h14c0.6,0,1,0.4,1,1V19z"></path><path d="M16,11h-3V8c0-0.6-0.4-1-1-1s-1,0.4-1,1v3H8c-0.6,0-1,0.4-1,1s0.4,1,1,1h3v3c0,0.6,0.4,1,1,1s1-0.4,1-1v-3h3c0.6,0,1-0.4,1-1S16.6,11,16,11z"></path></svg></div></div><div class="items" data-v-35f99ef5><!--[--><!--[--><a class="VPLink link link" href="/golang/" style="padding-left:0px;" data-v-2cfe069a data-v-3c355974><!--[--><span class="link-text" data-v-2cfe069a>Golang</span><!--]--><!----></a><!----><!--]--><!--]--></div></section></div><!--]--></nav></aside><div class="VPContent has-sidebar" id="VPContent" data-v-c6a644e1 data-v-c95df128><div class="VPDoc has-sidebar has-aside" data-v-c95df128 data-v-37ebe389><div class="container" data-v-37ebe389><div class="aside" data-v-37ebe389><div class="aside-curtain" data-v-37ebe389></div><div class="aside-container" data-v-37ebe389><div class="aside-content" data-v-37ebe389><div class="VPDocAside" data-v-37ebe389 data-v-afc4c1a1><!--[--><!--]--><!--[--><!--]--><div class="VPDocAsideOutline" data-v-afc4c1a1 data-v-2865c0b0><div class="content" data-v-2865c0b0><div class="outline-marker" data-v-2865c0b0></div><div class="outline-title" data-v-2865c0b0>On this page</div><nav aria-labelledby="doc-outline-aria-label" data-v-2865c0b0><span class="visually-hidden" id="doc-outline-aria-label" data-v-2865c0b0> Table of Contents for current page </span><ul class="root" data-v-2865c0b0 data-v-1188541a><!--[--><!--]--></ul></nav></div></div><!--[--><!--]--><div class="spacer" data-v-afc4c1a1></div><!--[--><!--]--><!----><!--[--><!--]--><!--[--><!--]--></div></div></div></div><div class="content" data-v-37ebe389><div class="content-container" data-v-37ebe389><!--[--><!--]--><main class="main" data-v-37ebe389><div style="position:relative;" class="vp-doc _golang_go-language-concise-course_post" data-v-37ebe389><div><h1 id="go-语言介绍" tabindex="-1">Go 语言介绍 <a class="header-anchor" href="#go-语言介绍" aria-hidden="true">#</a></h1><h2 id="go-语言的起源（了解）" tabindex="-1">Go 语言的起源（了解） <a class="header-anchor" href="#go-语言的起源（了解）" aria-hidden="true">#</a></h2><ul><li>Go 语言起源 2007 年，并于 2009 年正式对外发布。</li><li>从 2009 年 9 月 21 日开始作为谷歌公司 20% 兼职项目，即相关员工利用 20% 的空余时间来参与 Go 语言的研发工作。</li><li>Go 的三位领导者均是著名的计算机工程师： <ul><li>Robert Griesemer（参与开发 Java HotSpot 虚拟机）</li><li>Rob Pike（Go 语言项目总负责人，贝尔实验室 Unix 团队成员，参与的项目包括 Plan 9，Inferno 操作系统和 Limbo 编程语言）</li><li>Ken Thompson（贝尔实验室 Unix 团队成员，C 语言、Unix 和 Plan 9 的创始人之一，与 Rob Pike 共同开发了 UTF-8 字符集规范）</li></ul></li></ul><h2 id="go-语言的特性（理解）" tabindex="-1">Go 语言的特性（理解） <a class="header-anchor" href="#go-语言的特性（理解）" aria-hidden="true">#</a></h2><ol><li><p><strong>并发编程</strong></p><p>Go 语言引入了 <code>goroutine</code>，它是 Go 实现快速高效的并发编程的关键。通过调用 <code>go</code> 关键字，就可以让函数以 goroutine 的方式进行运行，也就是以协程为单位进行运行。协程比线程更加的轻量级，也更节省系统资源，这使得我们可以创建大量的 goroutine，从而进行轻松且高质量的并发编程。同时，goroutine 内部采用管道 <code>channel</code> 进行消息传递，从而实现共享内存。</p></li><li><p><strong>错误处理</strong></p><p>Go 语言中的错误处理的哲学和 C 语言一样，函数通过返回错误类型 (<code>error</code>) 或者 <code>bool</code> 类型（不需要区分多种错误状态时）表明函数的执行结果，调用检查返回的错误类型值是否是 <code>nil</code> 来判断调用结果。并引入了 <code>defer</code> 关键字用于标准的错误处理流程，并提供了内置函数 <code>panic</code>、<code>recover</code> 完成异常的抛出与捕捉。</p></li><li><p><strong>垃圾回收</strong></p><p>Go 语言自带垃圾自动回收的功能，让 Go 语言不需要 <code>delete</code> 关键字，也不需要 <code>free()</code> 来释放内存。因此开发者无需考虑何时需要释放之前分配的内存的问题，系统会自动帮我们判断，并在适当的时候进行垃圾处理。垃圾自动回收是 Go 语言的一个特点，也是一大亮点。</p></li><li><p><strong>多返回值</strong></p><p>支持函数的多返回值功能，这个特性让开发者可以从原来用各种比较别扭的方式返回多个值的痛苦中解脱出来，不需要为了一次返回多个值而专门定义一个结构体。并且每个返回值都有自己的名字，开发者还可以选择具体需要返回的值，只需要使用下划线 <code>_</code> 作为占位符来丢掉不要的返回值即可。</p></li><li><p><strong>匿名函数</strong></p><p>Go 语言支持常规的匿名函数和闭包，开发者可以随意对匿名函数变量进行传递和调用，下面就是一个匿名函数样例：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">f := func(x,y int) int {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return x+y</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div></li></ol><h2 id="go-语言可以做什么（了解）" tabindex="-1">Go 语言可以做什么（了解） <a class="header-anchor" href="#go-语言可以做什么（了解）" aria-hidden="true">#</a></h2><p>Go 语言是谷歌发布的第二款开源编程语言。专门针对多处理器系统应用程序的编程进行了优化，使用 Go 编译的程序可以媲美 C 或 C++ 代码的速度，而且更加安全、支持并行进程。</p><p>Go 的目标是希望提升现有编程语言对程序库等依赖性 (dependency) 的管理，这些软件元素会被应用程序反复调用。由于存在并行编程模式，因此也被设计用来解决多处理器的任务。目前，已经有很多公司开始使用 Go 语言开发自己的服务，甚至完全转向 Go 开发，也诞生了很多基于 Go 的服务和应用，比如 <code>Dokcer</code>、<code>k8s</code> 等。</p><h2 id="helloworld-程序" tabindex="-1">HelloWorld 程序 <a class="header-anchor" href="#helloworld-程序" aria-hidden="true">#</a></h2><p>让我们通过一个 Go 语言版本的 HelloWorld 来认识这门新语言的模样。</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">import (</span></span>
+<span class="line"><span style="color:#A6ACCD;">    &quot;fmt&quot; //导入fmt包，调用其中的Println()函数</span></span>
+<span class="line"><span style="color:#A6ACCD;">)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;Hello，world！&quot;)</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>终端下运行结果：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">go run hello.go</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h1 id="go-语言基础" tabindex="-1">Go 语言基础 <a class="header-anchor" href="#go-语言基础" aria-hidden="true">#</a></h1><h2 id="常量" tabindex="-1">常量 <a class="header-anchor" href="#常量" aria-hidden="true">#</a></h2><p>常量使用关键字 <code>const</code> 声明，下面有几个例子：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">const limit = 512</span></span>
+<span class="line"><span style="color:#A6ACCD;">const top uint16 = 1421</span></span>
+<span class="line"><span style="color:#A6ACCD;">const Pi float64 = 3.1415926</span></span>
+<span class="line"><span style="color:#A6ACCD;">const x,y int = 1,3 //多重赋值</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>常量定义可以限定常量类型，但不是必需的。如果定义常量时没有指定类型，那么该常量就是无类型常量，也叫字面常量。</p><p>当需要设置多个常量的时候，不必重复使用 const 关键字，可以使用以下语法：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">const (</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Cyan = 0</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Black = 1</span></span>
+<span class="line"><span style="color:#A6ACCD;">    White = 2</span></span>
+<span class="line"><span style="color:#A6ACCD;">)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>Go 语言还预定义了这些常量：<code>true</code>、<code>false</code>、<code>iota</code>。</p><p><code>iota</code> 是一个可以被编译器修改的常量，在 <code>const</code> 关键字出现时被重置为 0，在下一个 <code>const</code> 出现之前，每出现一次 <code>iota</code>，其所代表的数字自动加 1。下面通过一个例子讲解 <code>iota</code> 的用法：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">const (</span></span>
+<span class="line"><span style="color:#A6ACCD;">    a = iota  //a == 0</span></span>
+<span class="line"><span style="color:#A6ACCD;">    b = iota  //b ==1</span></span>
+<span class="line"><span style="color:#A6ACCD;">    c = iota  //c == 2</span></span>
+<span class="line"><span style="color:#A6ACCD;">)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">const d = iota //d==0,因为const的出现，iota被重置为0</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h2 id="变量" tabindex="-1">变量 <a class="header-anchor" href="#变量" aria-hidden="true">#</a></h2><p>Go 语言引入了关键字 <code>var</code> 对变量进行声明，也可以使用 <code>:=</code> 来对变量直接进行初始化，Go 编译器会自动推导出该变量的类型，这大大的方便了开发者的工作。但是需要注意的是 <code>:=</code> 左侧的变量不能是已经被声明过的，否则会导致编译器错误。</p><p>以下是 Go 声明和初始化变量的各种方法：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">var a int</span></span>
+<span class="line"><span style="color:#A6ACCD;">var b string</span></span>
+<span class="line"><span style="color:#A6ACCD;">var c float64</span></span>
+<span class="line"><span style="color:#A6ACCD;">var d [5] int  //数组</span></span>
+<span class="line"><span style="color:#A6ACCD;">var e [] int   //数组切片</span></span>
+<span class="line"><span style="color:#A6ACCD;">var f * int    //正确</span></span>
+<span class="line"><span style="color:#A6ACCD;">var v1 int = 5 //正确</span></span>
+<span class="line"><span style="color:#A6ACCD;">var v2 = 5     //正确，编译器自动推导出V2类型</span></span>
+<span class="line"><span style="color:#A6ACCD;">v3 := 5        //正确，编译器自动推导出V3的类型</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>Go 语言提供了大多数语言不支持的<strong>多重赋值</strong>，这使得变量的交换变得十分简单。下面通过一个例子来了解 Go 语言的多重赋值：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">i := 2</span></span>
+<span class="line"><span style="color:#A6ACCD;">j := 3</span></span>
+<span class="line"><span style="color:#A6ACCD;">i, j = j, i  //交换i和j的值，此时i == 3，j == 2</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h2 id="数据类型" tabindex="-1">数据类型 <a class="header-anchor" href="#数据类型" aria-hidden="true">#</a></h2><h3 id="_1-整型" tabindex="-1">1. 整型 <a class="header-anchor" href="#_1-整型" aria-hidden="true">#</a></h3><p>Go 语言提供了 11 种整型，如下列表所示。</p><table><thead><tr><th style="text-align:left;">类型</th><th style="text-align:left;">说明</th></tr></thead><tbody><tr><td style="text-align:left;">byte</td><td style="text-align:left;">等同于 uint8</td></tr><tr><td style="text-align:left;">int</td><td style="text-align:left;">依赖于不同平台下的实现，可以是 int32 或者 int64</td></tr><tr><td style="text-align:left;">int8</td><td style="text-align:left;">[-128, 127]</td></tr><tr><td style="text-align:left;">int16</td><td style="text-align:left;">[-32768, 32767]</td></tr><tr><td style="text-align:left;">int32</td><td style="text-align:left;">[-2147483648, 2147483647]</td></tr><tr><td style="text-align:left;">int64</td><td style="text-align:left;">[-9223372036854775808, 9223372036854775807]</td></tr><tr><td style="text-align:left;">rune</td><td style="text-align:left;">等同于 int32</td></tr><tr><td style="text-align:left;">uint</td><td style="text-align:left;">依赖于不同平台下的实现，可以是 uint32 或者 uint64</td></tr><tr><td style="text-align:left;">uint8</td><td style="text-align:left;">[0, 255]</td></tr><tr><td style="text-align:left;">uint16</td><td style="text-align:left;">[0, 65535]</td></tr><tr><td style="text-align:left;">uint32</td><td style="text-align:left;">[0, 4294967295]</td></tr><tr><td style="text-align:left;">uint64</td><td style="text-align:left;">[0, 18446744073709551615]</td></tr><tr><td style="text-align:left;">uintptr</td><td style="text-align:left;">一个可以恰好容纳指针值的无符号整型（对 32 位平台是 uint32, 对 64 位平台是 uint64）</td></tr></tbody></table><p>Go 语言中可以通过 <code>unsafe.Sizeof</code> 函数查看类型的字节长度:</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">import (</span></span>
+<span class="line"><span style="color:#A6ACCD;">    &quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">    &quot;unsafe&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    a := 12</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;length of a: &quot;, unsafe.Sizeof(a))</span></span>
+<span class="line"><span style="color:#A6ACCD;">    var b int = 12</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;length of b(int): &quot;, unsafe.Sizeof(b))</span></span>
+<span class="line"><span style="color:#A6ACCD;">    var c int8 = 12</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;length of c(int8): &quot;, unsafe.Sizeof(c))</span></span>
+<span class="line"><span style="color:#A6ACCD;">    var d int16 = 12</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;length of d(int16): &quot;, unsafe.Sizeof(d))</span></span>
+<span class="line"><span style="color:#A6ACCD;">    var e int32 = 12</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;length of e(int32): &quot;, unsafe.Sizeof(e))</span></span>
+<span class="line"><span style="color:#A6ACCD;">    var f int64 = 12</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;length of f(int64): &quot;, unsafe.Sizeof(f))</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>以上代码中，<code>fmt</code> 包用于格式化字符串，<code>unsafe</code> 包含了用于获取 Go 语言类型信息的方法。通过 <code>unsafe.Sizeof</code> 方法获取该类型的字节长度。运行以上代码，输出结果：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">$ go run main.go</span></span>
+<span class="line"><span style="color:#A6ACCD;">length of a:  8</span></span>
+<span class="line"><span style="color:#A6ACCD;">length of b(int):  8</span></span>
+<span class="line"><span style="color:#A6ACCD;">length of c(int8):  1</span></span>
+<span class="line"><span style="color:#A6ACCD;">length of d(int16):  2</span></span>
+<span class="line"><span style="color:#A6ACCD;">length of e(int32):  4</span></span>
+<span class="line"><span style="color:#A6ACCD;">length of f(int64):  8</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h3 id="_2-浮点型" tabindex="-1">2. 浮点型 <a class="header-anchor" href="#_2-浮点型" aria-hidden="true">#</a></h3><p>Go 语言提供了两种浮点类型和两种复数类型，具体如下：</p><table><thead><tr><th style="text-align:left;">类型</th><th style="text-align:left;">说明</th></tr></thead><tbody><tr><td style="text-align:left;">float32</td><td style="text-align:left;">±3.402 823 466 385 288 598 117 041 834 845 169 254 40x1038 计算精度大概是小数点后 7 个十进制数</td></tr><tr><td style="text-align:left;">float64</td><td style="text-align:left;">±1.797 693 134 862 315 708 145 274 237 317 043 567 981x1038 计算精度大概是小数点后 15 个十进制数</td></tr><tr><td style="text-align:left;">complex32</td><td style="text-align:left;">复数，实部和虚部都是 float32</td></tr><tr><td style="text-align:left;">complex64</td><td style="text-align:left;">复数，实部和虚部都是 float64</td></tr></tbody></table><h3 id="_3-布尔类型" tabindex="-1">3. 布尔类型 <a class="header-anchor" href="#_3-布尔类型" aria-hidden="true">#</a></h3><p>Go 语言提供了内置的布尔值 <code>true</code> 和<code>false</code>。Go 语言支持标准的逻辑和比较操作，这些操作的结果都是布尔值。值得注意的地方是可以通过 <code>!b</code> 的方式反转变量 <code>b</code> 的真假。需要注意的是<strong>布尔类型不能接受其他类型的赋值，不支持自动或强制的类型转换</strong>。</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">var a bool</span></span>
+<span class="line"><span style="color:#A6ACCD;">a = true</span></span>
+<span class="line"><span style="color:#A6ACCD;">b := (2 == 3) //b也会被推导为bool类型</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">//错误示范</span></span>
+<span class="line"><span style="color:#A6ACCD;">var b bool</span></span>
+<span class="line"><span style="color:#A6ACCD;">b = 1 //编译错误</span></span>
+<span class="line"><span style="color:#A6ACCD;">b = bool(1) //编译错误</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h3 id="_4-字符串" tabindex="-1">4. 字符串 <a class="header-anchor" href="#_4-字符串" aria-hidden="true">#</a></h3><p>Go 语言中的字符串是 UTF-8 字符的一个序列（当字符为 ASCII 码时则占用 1 个字节，其它字符根据需要占用 2-4 个字节）。UTF-8 是被广泛使用的编码格式，是文本文件的标准编码，其它包括 XML 和 JSON 在内，也都使用该编码。由于该编码对占用字节长度的不定性，Go 中的字符串也可能根据需要占用 1 至 4 个字节，这与其它语言如 C++、Java 或者 Python 不同。Go 这样做的好处是不仅减少了内存和硬盘空间占用，同时也不用像其它语言那样需要对使用 UTF-8 字符集的文本进行编码和解码。</p><p>Go 语言中字符串的可以使用双引号 (<code>&quot;</code>) 或者反引号 (`) 来创建。双引号用来创建可解析的字符串字面量，所谓可解析的是指字符串中的一些符号可以被格式化为其他内容，如 <code>\n</code> 在在输出时候会被格式化成换行符，如果需要按照原始字符输出必须进行转义。而反引号创建的字符串原始是什么样，那输出还是什么，不需要进行任何转义。</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">t1 := &quot;\&quot;hello\&quot;&quot;             //内容： &quot;hello&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">t2 := `&quot;hello&quot;`               //内容：和t1一致</span></span>
+<span class="line"><span style="color:#A6ACCD;">t3 := &quot;\u6B22\u8FCE&quot;          //内容：欢迎</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>Go 语言中的部分转义字符如下表所示：</p><table><thead><tr><th style="text-align:left;">转义字符</th><th style="text-align:left;">含义</th></tr></thead><tbody><tr><td style="text-align:left;">\</td><td style="text-align:left;">表示反斜线</td></tr><tr><td style="text-align:left;">&#39;</td><td style="text-align:left;">单引号</td></tr><tr><td style="text-align:left;">&quot;</td><td style="text-align:left;">双引号</td></tr><tr><td style="text-align:left;">\n</td><td style="text-align:left;">换行符</td></tr><tr><td style="text-align:left;">\uhhhh</td><td style="text-align:left;">4 个 16 进制数字给定的 Unicode 字符</td></tr></tbody></table><p>在 Go 语言中单个字符可以使用单引号 (<code>&#39;</code>) 来创建。我们知道 <code>rune</code> 类型，它等同于 <code>int32</code>，在 Go 语言中，一个单一的字符可以用一个单一的 <code>rune</code> 来表示。这也是容易理解的，因为 Go 语言的字符串是 UTF-8 编码，其底层使用 4 个字节表示，也就是 32 bit。</p><p>在 Go 语言中，字符串支持切片操作，但是需要注意的是如果字符串都是由 ASCII 字符组成，那可以随便使用切片进行操作，但是如果字符串中包含其他非 ASCII 字符，直接使用切片获取想要的单个字符时需要十分小心，因为对字符串直接使用切片时是通过字节进行索引的，但是非 ASCII 字符在内存中可能不是由一个字节组成。如果想对字符串中字符依次访问，可以使用 <code>range</code> 操作符。另外获取字符串的长度可能有两种含义，一种是指获取字符串的字节长度，一种是指获取字符串的字符数量。字符串支持以下操作：</p><table><thead><tr><th style="text-align:left;">语法</th><th style="text-align:left;">描述</th></tr></thead><tbody><tr><td style="text-align:left;">s += t</td><td style="text-align:left;">将字符串 t 追加到 s 末尾</td></tr><tr><td style="text-align:left;">s + t</td><td style="text-align:left;">将字符串 s 和 t 级联</td></tr><tr><td style="text-align:left;">s[n]</td><td style="text-align:left;">从字符串 s 中索引位置为 n 处的原始字节</td></tr><tr><td style="text-align:left;">s[n:m]</td><td style="text-align:left;">从位置 n 到位置 <code>m-1</code> 处取得的字符（字节）串</td></tr><tr><td style="text-align:left;">s[n:]</td><td style="text-align:left;">从位置 n 到位置 <code>len(s)-1</code> 处取得的字符（字节）串</td></tr><tr><td style="text-align:left;">s[:m]</td><td style="text-align:left;">从位置 0 到位置 <code>m-1</code> 处取得的字符（字节）串</td></tr><tr><td style="text-align:left;">len(s)</td><td style="text-align:left;">字符串 s 中的字节数</td></tr><tr><td style="text-align:left;">len([]rune(s))</td><td style="text-align:left;">字符串 s 中字符的个数，可以使用更快的方法 <code>utf8.RuneCountInString()</code></td></tr><tr><td style="text-align:left;">[]rune(s)</td><td style="text-align:left;">将字符串 s 转换为一个 unicode 值组成的串</td></tr><tr><td style="text-align:left;">string(chars)</td><td style="text-align:left;">chars 类型是 <code>[]rune</code> 或者 <code>[]int32</code>, 将之转换为字符串</td></tr><tr><td style="text-align:left;">[]byte(s)</td><td style="text-align:left;">无副本的将字符串 s 转换为一个原始的字节的切片数组，不保证转换的字节是合法的 UTF-8 编码字节</td></tr></tbody></table><p>Go 语言标准库中的 <code>fmt</code> 包提供了打印函数将数据以字符串形式输出到控制台，文件，其他满足 <code>io.Writer</code> 接口的值以及其他字符串。<code>fmt.Printf</code> 就像 C 语言中的 `printf`` 函数一样，我们可以提供一些格式化指令，让 Go 语言对输出的字符串进行格式化。同样的我们可以使用一些格式化修饰符，改变格式化指令的输出结果， 如左对齐等。常用的格式化指令如下：</p><table><thead><tr><th style="text-align:left;">格式化指令</th><th style="text-align:left;">含义</th></tr></thead><tbody><tr><td style="text-align:left;">%%</td><td style="text-align:left;">% 字面量</td></tr><tr><td style="text-align:left;">%b</td><td style="text-align:left;">一个二进制整数，将一个整数格式化为二进制的表达方式</td></tr><tr><td style="text-align:left;">%c</td><td style="text-align:left;">一个 Unicode 的字符</td></tr><tr><td style="text-align:left;">%d</td><td style="text-align:left;">十进制数值</td></tr><tr><td style="text-align:left;">%o</td><td style="text-align:left;">八进制数值</td></tr><tr><td style="text-align:left;">%x</td><td style="text-align:left;">小写的十六进制数值</td></tr><tr><td style="text-align:left;">%X</td><td style="text-align:left;">大写的十六进制数值</td></tr><tr><td style="text-align:left;">%U</td><td style="text-align:left;">一个 Unicode 表示法表示的整形码值，默认是 4 个数字字符</td></tr><tr><td style="text-align:left;">%s</td><td style="text-align:left;">输出以原生的 UTF-8 字节表示的字符，如果 console 不支持 UTF-8 编码，则会输出乱码</td></tr><tr><td style="text-align:left;">%t</td><td style="text-align:left;">以 true 或者 false 的方式输出布尔值</td></tr><tr><td style="text-align:left;">%v</td><td style="text-align:left;">使用默认格式输出值，或者使用类型的 String() 方法输出的自定义值，如果该方法存在的话</td></tr><tr><td style="text-align:left;">%T</td><td style="text-align:left;">输出值的类型</td></tr></tbody></table><p>常用的格式化指令修饰符如下：</p><ul><li><code>空白</code> 如果输出的数字为负，则在其前面加上一个减号 <code>-</code>。如果输出的是整数，则在前面加一个空格。使用 <code>%x</code> 或者 <code>%X</code> 格式化指令输出时，会在结果之间添加一个空格。例如 <code>fmt.Printf(&quot;% X&quot;, &quot;实&quot;)</code> 输出 E5 AE 9E。</li><li><code>#</code><ul><li><code>%#o</code> 输出以 <code>0</code> 开始的八进制数据。</li><li><code>%#x</code> 输出以 <code>0x</code> 开始的十六进制数据。</li></ul></li><li><code>+</code> 让格式化指令在数值前面输出 <code>+</code> 号或者 <code>-</code> 号，为字符串输出 ASCII 字符（非 ASCII 字符会被转义），为结构体输出其字段名。</li><li><code>-</code> 让格式化指令将值向左对齐（默认值为像右对齐）。</li><li><code>0</code> 让格式指令以数字 0 而非空白进行填充。</li></ul><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">import (</span></span>
+<span class="line"><span style="color:#A6ACCD;">    &quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    text := &quot;\u5B9E\u9A8C\u697C&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;bool output:\n%t\n%t\n\n&quot;, true, false)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;number output, origin value: 64&quot;)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;|%b|%8b|%-8b|%08b|% 8b|\n&quot;, 64, 64, 64, 64, 64)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;|%x|%8x|%-8x|%08X|% 8X|\n\n&quot;, 64, 64, 64, 64, 64)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(`text output, origin value: \u5B9E\u9A8C\u697C`)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;content: %s\n&quot;, text)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;hex value: % X\nUnicode value: &quot;, text)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    for _, char := range text {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        fmt.Printf(&quot;%U &quot;, char)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    bytes := []byte(text)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;value of bytes: %s\n&quot;, bytes)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;hex value of bytes: % X\n&quot;, bytes)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;origin value of bytes: %v\n&quot;, bytes)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>运行代码，输出如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">$ go run main.go</span></span>
+<span class="line"><span style="color:#A6ACCD;">bool output:</span></span>
+<span class="line"><span style="color:#A6ACCD;">true</span></span>
+<span class="line"><span style="color:#A6ACCD;">false</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">number output, origin value: 64</span></span>
+<span class="line"><span style="color:#A6ACCD;">|1000000| 1000000|1000000 |01000000| 1000000|</span></span>
+<span class="line"><span style="color:#A6ACCD;">|40|      40|40      |00000040|      40|</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">text output, origin value: \u5B9E\u9A8C\u697C</span></span>
+<span class="line"><span style="color:#A6ACCD;">content: 实验楼</span></span>
+<span class="line"><span style="color:#A6ACCD;">hex value: E5 AE 9E E9 AA 8C E6 A5 BC</span></span>
+<span class="line"><span style="color:#A6ACCD;">Unicode value: U+5B9E U+9A8C U+697C</span></span>
+<span class="line"><span style="color:#A6ACCD;">value of bytes: 实验楼</span></span>
+<span class="line"><span style="color:#A6ACCD;">hex value of bytes: E5 AE 9E E9 AA 8C E6 A5 BC</span></span>
+<span class="line"><span style="color:#A6ACCD;">origin value of bytes: [229 174 158 233 170 140 230 165 188]</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h3 id="_5-字符类型" tabindex="-1">5. 字符类型 <a class="header-anchor" href="#_5-字符类型" aria-hidden="true">#</a></h3><p>在 Go 语言中支持两个字符类型，一个是 <code>Byte</code>（实际上是 Unit8 的别名），代表 UTF-8 字符串的单个字节的值；另一个是 <code>rune</code>，代表单个 Unicode 字符。</p><p>处于简化语言的考虑，Go 语言的多数 API 都假设字符串为 UTF-8 编码。尽管 Unicode 字符在标准库中有支持，但实际很少使用。</p><h2 id="数组" tabindex="-1">数组 <a class="header-anchor" href="#数组" aria-hidden="true">#</a></h2><p>Go 语言的数组是一个定长的序列，其中的元素类型相同。多维数组可以简单地使用自身为数组的元素来创建。数组的元素使用操作符号 <code>[ ]</code> 来索引，索引从 <code>0</code> 开始，到 <code>len(array)-1</code> 结束。数组使用以下语法创建：</p><ul><li><code>[length]Type</code></li><li><code>[N]Type{value1, value2, ..., valueN}</code></li><li><code>[...]Type{value1, value2, ..., valueN}</code></li></ul><p>如果使用了 <code>...</code>（省略符）操作符，Go 语言会为我们自动计算数组的长度。在任何情况下，一个数组的长度都是固定的并且不可修改。数组的长度可以使用 <code>len()</code> 函数获得。由于数组的长度是固定的，因此数组的长度和容量都是一样的，因此对于数组而言 <code>cap()</code> 和 <code>len()</code> 函数返回值都是一样的。数组也可以使用和切片一样的语法进行切片，只是其结果为一个切片，而非数组。同样的，数组也可以使用 <code>range</code> 进行索引访问。</p><h2 id="切片" tabindex="-1">切片 <a class="header-anchor" href="#切片" aria-hidden="true">#</a></h2><p>Go 语言的切片比数组更加灵活，强大而且方便。数组是按值传递的（即是传递的副本），而切片是引用类型，传递切片的成本非常小，而且是不定长的。数组是定长的，而切片可以调整长度。创建切片的语法如下：</p><ul><li><code>make([ ]Type, length, capacity)</code></li><li><code>make([ ]Type, length)</code></li><li><code>[ ]Type{}</code></li><li><code>[ ]Type{value1, value2, ..., valueN}</code></li></ul><p>内置函数 <code>make()</code> 用于<strong>创建切片、映射和通道</strong>。当用于创建一个切片时，它会创建一个隐藏的初始化为零值的数组，然后返回一个引用该隐藏数组的切片。该隐藏的数组与 Go 语言中的所有数组一样，都是固定长度，如果使用第一种语法创建，那么其长度为切片的容量 <code>capacity</code>；如果是第二种语法，那么其长度记为切片的长度 <code>length</code>。一个切片的容量即为隐藏数组的长度，而其长度则为不超过该容量的任意值。另外可以通过内置的函数 <code>append()</code> 来增加切片的容量。切片可以支持以下操作：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">import (</span></span>
+<span class="line"><span style="color:#A6ACCD;">    &quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    a := [...]int{1, 2, 3, 4, 5, 6, 7}</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;len and cap of array %v is: %d and %d\n&quot;, a, len(a), cap(a))</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;item in array: %v is:&quot;, a)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    for _, value := range a {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        fmt.Printf(&quot;% d&quot;, value)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println()</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    s1 := a[3:6]</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;len and cap of slice: %v is: %d and %d\n&quot;, s1, len(s1), cap(s1))</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;item in slice: %v is:&quot;, s1)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    for _, value := range s1 {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        fmt.Printf(&quot;%d&quot;, value)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println()</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    s1[0] = 456</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;item in array changed after changing slice: %v is:&quot;, s1)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    for _, value := range a {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        fmt.Printf(&quot;%d&quot;, value)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println()</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    s2 := make([]int, 10, 20)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    s2[4] = 5</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;len and cap of slice: %v is: %d and %d\n&quot;, s2, len(s2), cap(s2))</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;item in slice %v is:&quot;, s2)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    for _, value := range s2 {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        fmt.Printf(&quot;%d&quot;, value)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println()</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>运行代码输出如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">$  go run main.go</span></span>
+<span class="line"><span style="color:#A6ACCD;">len and cap of array [1 2 3 4 5 6 7] is: 7 and 7</span></span>
+<span class="line"><span style="color:#A6ACCD;">item in array: [1 2 3 4 5 6 7] is: 1 2 3 4 5 6 7</span></span>
+<span class="line"><span style="color:#A6ACCD;">len and cap of slice: [4 5 6] is: 3 and 4</span></span>
+<span class="line"><span style="color:#A6ACCD;">item in slice: [4 5 6] is: 4 5 6</span></span>
+<span class="line"><span style="color:#A6ACCD;">item in array changed after changing slice: [456 5 6] is: 1 2 3 456 5 6 7</span></span>
+<span class="line"><span style="color:#A6ACCD;">len and cap of slice: [0 0 0 0 5 0 0 0 0 0] is: 10 and 20</span></span>
+<span class="line"><span style="color:#A6ACCD;">item in slice [0 0 0 0 5 0 0 0 0 0] is: 0 0 0 0 5 0 0 0 0 0</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h2 id="包" tabindex="-1">包 <a class="header-anchor" href="#包" aria-hidden="true">#</a></h2><p>Go 语言组织代码的方式是包，包是各种类型和函数的集合。在包中，如果标示符（类型名称，函数名称，方法名称）的首字母是大写，那这些标示符是可以被导出的，也就是说可以在包以外直接使用。</p><p><code>$GOPATH</code> 环境变量（指向一个或多个目录），以及其子目录 <code>src</code> 目录的，当我们使用 <code>import</code> 关键字导入包的时候，Go 语言会在 <code>$GOPATH</code> 和 <code>GOROOT</code> 目录中搜索包。</p><h1 id="go-流程控制" tabindex="-1">Go 流程控制 <a class="header-anchor" href="#go-流程控制" aria-hidden="true">#</a></h1><h2 id="流程控制" tabindex="-1">流程控制 <a class="header-anchor" href="#流程控制" aria-hidden="true">#</a></h2><p>Go 语言提供的流程控制语句包括 <code>if</code>、<code>switch</code>、<code>for</code>、<code>goto</code>、<code>select</code>，其中 <code>select</code> 用于监听 <code>channel</code>（通道）。</p><p><strong>if 语句</strong></p><p>语法：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">if optionalStatement1; booleanExpression1 {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    block1</span></span>
+<span class="line"><span style="color:#A6ACCD;">} else if optionalStatement2; booleanExpression2 {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    block2</span></span>
+<span class="line"><span style="color:#A6ACCD;">} else {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    block3</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>其中 <code>optionalStatement</code> 是可选的表达式，真正决定分支走向的是 <code>booleanExpression1</code> 的值。</p><p><strong>for 语句</strong></p><p>Go 语言的 <code>for</code> 语句可以遍历数组，切片，映射等类型，也可以用于无限循环。以下是其语法：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">for { // 无限循环</span></span>
+<span class="line"><span style="color:#A6ACCD;">    block</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">for booleanExpression { // while循环，在Go语言中没有while关键字</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">for index, char := range aString { // 迭代字符串</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">for item := range aChannel { // 迭代通道</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p><strong>跳转语句</strong></p><p>Go 语言中使用 <code>goto</code> 关键字实现跳转。<code>goto</code> 语句的语义非常简单，就是跳转到本函数内的某个标签，例如：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">func myfunc(){</span></span>
+<span class="line"><span style="color:#A6ACCD;">    i := 0</span></span>
+<span class="line"><span style="color:#A6ACCD;">    THIS: //定义一个THIS标签</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(i)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    i++</span></span>
+<span class="line"><span style="color:#A6ACCD;">    if i &lt; 1 {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        goto THIS //跳转到THIS标签</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p><strong>switch 语句</strong></p><p>Go 语言中 <code>switch</code> 分支既可用于常用的分支就像 C 语言中的 <code>switch</code> 一样，也可以用于类型开关，所谓类型开关就是用于判断变量属于什么类型。但是需要注意的是 Go 语言的 <code>switch</code> 语句不会自动贯穿，相反，如果想要贯穿需要添加 <code>fallthrough</code> 语句。表达式开关 <code>switch</code> 的语法如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">switch optionalStatement; optionalExpression {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    case expression1: block1</span></span>
+<span class="line"><span style="color:#A6ACCD;">    ...</span></span>
+<span class="line"><span style="color:#A6ACCD;">    case expressionN: blockN</span></span>
+<span class="line"><span style="color:#A6ACCD;">    default: blockD</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>下面是个例子：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">switch {        // 没有表达式，默认为True值，匹配分支中值为True的分支</span></span>
+<span class="line"><span style="color:#A6ACCD;">    case value &lt; minimum:</span></span>
+<span class="line"><span style="color:#A6ACCD;">        return minimum</span></span>
+<span class="line"><span style="color:#A6ACCD;">    case value &gt; maximum:</span></span>
+<span class="line"><span style="color:#A6ACCD;">        return maximum</span></span>
+<span class="line"><span style="color:#A6ACCD;">    default:</span></span>
+<span class="line"><span style="color:#A6ACCD;">        return value</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>在上面的例子中，switch 后面没有默认的表达式，这个时候 Go 语言默认其值为 <code>True</code>。</p><p>在前面我们提到过类型断言，如果我们知道变量的类型就可以使用类型断言，但是当我们知道类型可能是许多类型中的一种时候，我们就可以使用类型开关。其语法如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">switch optionalStatement; typeSwitchGuard {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    case type1: block1</span></span>
+<span class="line"><span style="color:#A6ACCD;">    ...</span></span>
+<span class="line"><span style="color:#A6ACCD;">    case typeN: blockN</span></span>
+<span class="line"><span style="color:#A6ACCD;">    default: blockD</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>下面是个例子：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">import (</span></span>
+<span class="line"><span style="color:#A6ACCD;">    &quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func classchecker(items ...interface{}) { // 创建一个函数，该函数可以接受任意多的任意类型的参数</span></span>
+<span class="line"><span style="color:#A6ACCD;">    for i, x := range items {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        switch x := x.(type) { // 创建了影子变量</span></span>
+<span class="line"><span style="color:#A6ACCD;">        case bool:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Printf(&quot;param #%d is a bool, value: %t\n&quot;, i, x)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        case float64:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Printf(&quot;param #%d is a float64, value: %f\n&quot;, i, x)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        case int, int8, int16, int32, int64:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Printf(&quot;param #%d is a int, value: %d\n&quot;, i, x)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        case uint, uint8, uint16, uint32, uint64:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Printf(&quot;param #%d is a uint, value: %d\n&quot;, i, x)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        case nil:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Printf(&quot;param #%d is a nil\n&quot;, i)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        case string:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Printf(&quot;param #%d is a string, value: %s\n&quot;, i, x)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        default:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Printf(&quot;param #%d&#39;s type is unknow\n&quot;, i)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        }</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    classchecker(5, -17.98, &quot;AIDEN&quot;, nil, true, complex(1, 1))</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>程序运行输出如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">$ go run switch_t.go</span></span>
+<span class="line"><span style="color:#A6ACCD;">param #0 is a int, value: 5</span></span>
+<span class="line"><span style="color:#A6ACCD;">param #1 is a float64, value: -17.980000</span></span>
+<span class="line"><span style="color:#A6ACCD;">param #2 is a string, value: AIDEN</span></span>
+<span class="line"><span style="color:#A6ACCD;">param #3 is a nil</span></span>
+<span class="line"><span style="color:#A6ACCD;">param #4 is a bool, value: true</span></span>
+<span class="line"><span style="color:#A6ACCD;">param #5&#39;s type is unknow</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h2 id="函数" tabindex="-1">函数 <a class="header-anchor" href="#函数" aria-hidden="true">#</a></h2><p>Go 语言可以很方便的自定义函数，其中有特殊的函数 <code>main</code> 函数。<code>main</code> 函数必须出现在 <code>main</code> 包里，且只能出现一次。当 Go 程序运行时候会自动调用 <code>main</code> 函数开始整个程序的执行。<code>main</code> 函数不可接收任何参数，也不返回任何结果。</p><p><strong>函数的定义</strong></p><p>在 Go 语言中，函数的基本组成包括：关键字 <code>func</code>、函数名、参数列表、返回值、函数体和返回语句，这里我们用一个简单的加法函数来对函数的定义进行说明。</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package add</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func Add(a int, b int) (num int){</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return a + b</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p><strong>函数的调用</strong></p><p>函数调用非常简单，先将被调用函数所在的包导入，就可以直接使用该函数了。注意需要把包文件夹放到 $GOPATH 目录中，实例如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">import (</span></span>
+<span class="line"><span style="color:#A6ACCD;">    &quot;add&quot; //导入 add 包</span></span>
+<span class="line"><span style="color:#A6ACCD;">    &quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main(){</span></span>
+<span class="line"><span style="color:#A6ACCD;">    c := add.Add(1, 2) //调用 add 包中的 add 函数</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(c)</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p><strong>函数的多返回值</strong></p><p>Go 语言的函数和方法可以有多个返回值，这是 Go 提供的一个优美的特性，示例如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package Divide</span></span>
+<span class="line"><span style="color:#A6ACCD;">import &quot;errors&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func divide (a int, b int) (num int, err error){ //定义两个返回值</span></span>
+<span class="line"><span style="color:#A6ACCD;">    if b == 0 {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        err = errors.New(&quot;被除数不能为零！&quot;)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        return</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return a / b, nil   //支持多个返回值</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p><strong>匿名函数</strong></p><p>在 Go 语言中，你可以在代码里随时定义匿名函数，匿名函数由一个不带函数名的函数声明和函数体组成，示例如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">func (a, b, c int) bool {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return a * b &lt; c</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>你可以将匿名函数直接赋值给一个变量，也可以直接调用运行，示例如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">x := func (a, b, c int) bool {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return a * b &lt; c</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func (a, b, c int) bool {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return a * b &lt; c</span></span>
+<span class="line"><span style="color:#A6ACCD;">} (1, 2, 3) //小括号内直接给参数列表表示函数调用</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h2 id="类型转换" tabindex="-1">类型转换 <a class="header-anchor" href="#类型转换" aria-hidden="true">#</a></h2><p>Go 语言提供了一种在不同但相互兼容的类型之间相互转换的方式，这种转换非常有用并且是安全的。但是需要注意的是在数值之间进行转换可能造成其他问题，如精度丢失或者错误的结果。以下是类型转换的语法：</p><ul><li><code>resultOfType := Type(expression)</code></li></ul><p>几个例子：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">x := int16(2345)        // 声明一个类型为int16的整数，其值为2345</span></span>
+<span class="line"><span style="color:#A6ACCD;">y := int32(x)           // 将int16类型的整数转换为int32类型</span></span>
+<span class="line"><span style="color:#A6ACCD;">a := uint16(65000)       // 声明一个类型为uint16类型的整数</span></span>
+<span class="line"><span style="color:#A6ACCD;">b := int16(a)           // 转换为int16类型，虽然能转换成功，但是由于65000超过in16类型的范围，会导致结果错误，b的值为 -536</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>另外在 Go 语言中可以通过 <code>type</code> 关键字声明类型，如 <code>type StringsSlice []string</code> 将 <code>[]string</code>（<code>string</code> 类型的切片）声明为 <code>StringSlice</code> 类型。</p><h2 id="类型断言" tabindex="-1">类型断言 <a class="header-anchor" href="#类型断言" aria-hidden="true">#</a></h2><p>说到类型断言就需要先了解下 Go 语言中的接口。在 Go 语言中接口是一个自定义类型。它声明了一个或者多个方法。任何实现了这些方法的对象（类型）都满足这个接口。</p><p>接口是完全抽象的，不能实例化。<code>interface{}</code> 类型表示一个空接口，任何类型都满足空接口。也就是说 <code>interface{}</code> 类型的值可以用于表示任意 Go 语言类型的值。</p><p>既然 <code>interface{}</code> 可以用于表示任意类型，那有的时候我们需要将 <code>interface{}</code> 类型转换为我们需要的类型，这个操作称为类型断言。</p><p><strong>一般情况下只有我们希望表达式是某种特定类型的值时才使用类型断言</strong>。Go 语言中可以使用以下语法：</p><ul><li><code>resultOfType, boolean := expression.(Type)</code>：安全的类型断言。</li><li><code>resultOfType := expression.(Type)</code>：非安全的类型断言，失败时程序会产生异常。</li></ul><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">import (</span></span>
+<span class="line"><span style="color:#A6ACCD;">    &quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    x := uint16(65000)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    y := int16(x) // 将 x转换为int16类型</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;type and value of x is: %T and %d\n&quot;, x, x) // %T 格式化指令的作用是输出变量的类型</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;type and value of y is: %T and %d\n&quot;, y, y)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    var i interface{} = 99 // 创建一个interface{}类型，其值为99</span></span>
+<span class="line"><span style="color:#A6ACCD;">    var s interface{} = []string{&quot;left&quot;, &quot;right&quot;}</span></span>
+<span class="line"><span style="color:#A6ACCD;">    j := i.(int) // 我们假设i是兼容int类型，并使用类型断言将其转换为int类型</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;type and value of j is: %T and %d\n&quot;, j, j)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    if s, ok := s.([]string); ok { // 创建了影子变量，if的作用域中覆盖了外部的变量s</span></span>
+<span class="line"><span style="color:#A6ACCD;">        fmt.Printf(&quot;%T -&gt; %q\n&quot;, s, s)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>运行程序：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">$ go run main.go</span></span>
+<span class="line"><span style="color:#A6ACCD;">type and value of x is: uint16 and 65000</span></span>
+<span class="line"><span style="color:#A6ACCD;">type and value of y is: int16 and -536</span></span>
+<span class="line"><span style="color:#A6ACCD;">type and value of j is: int and 99</span></span>
+<span class="line"><span style="color:#A6ACCD;">[]string -&gt; [&quot;left&quot; &quot;right&quot;]</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h2 id="错误处理" tabindex="-1">错误处理 <a class="header-anchor" href="#错误处理" aria-hidden="true">#</a></h2><p>错误处理是任何语言都需要考虑到的问题，而 Go 语言在错误处理上解决得更为完善，优雅的错误处理机制是 Go 语言的一大特点。</p><p><strong>error</strong> Go 语言引入了一个错误处理的标准模式，即 error 接口，该接口定义如下</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">type error interface {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Error() string</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>对于大多数函数，如果要返回错误，可以将 error 作为多返回值的最后一个：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">func foo(param int)(ret int, err error)</span></span>
+<span class="line"><span style="color:#A6ACCD;">{</span></span>
+<span class="line"><span style="color:#A6ACCD;">  ...</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>调用时的代码：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">n, err := foo(0)</span></span>
+<span class="line"><span style="color:#A6ACCD;">if err != nil {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    //  错误处理</span></span>
+<span class="line"><span style="color:#A6ACCD;">} else {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    // 使用返回值n</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>我们还可以自定义错误类型，创建源文件 error.go，输入以下代码：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">import &quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">import &quot;errors&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">//自定义的出错结构</span></span>
+<span class="line"><span style="color:#A6ACCD;">type myError struct {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    arg  int</span></span>
+<span class="line"><span style="color:#A6ACCD;">    errMsg string</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;">//实现Error接口</span></span>
+<span class="line"><span style="color:#A6ACCD;">func (e *myError) Error() string {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return fmt.Sprintf(&quot;%d - %s&quot;, e.arg, e.errMsg)</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">//两种出错</span></span>
+<span class="line"><span style="color:#A6ACCD;">func error_test(arg int) (int, error) {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    if arg &lt; 0  {</span></span>
+<span class="line"><span style="color:#A6ACCD;">         return -1, errors.New(&quot;Bad Arguments - negtive!&quot;)</span></span>
+<span class="line"><span style="color:#A6ACCD;">     }else if arg &gt;256 {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        return -1, &amp;myError{arg, &quot;Bad Arguments - too large!&quot;}</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return arg*arg, nil</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">//相关的测试</span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    for _, i := range []int{-1, 4, 1000} {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        if r, e := error_test(i); e != nil {</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Println(&quot;failed:&quot;, e)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        } else {</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Println(&quot;success:&quot;, r)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        }</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p><strong>defer</strong></p><p>可以在 Go 函数中添加多个 <code>defer</code> 语句，当函数执行到最后时，这些 <code>defer</code> 语句会按照逆序执行（即最后一个 <code>defer</code> 语句将最先执行），最后该函数返回。特别是当你在进行一些打开资源的操作时，遇到错误需要提前返回，在返回前你需要关闭相应的资源，不然很容易造成资源泄露等问题。如下代码所示，我们一般写打开一个资源是这样操作的：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">func CopyFile(dst, src string) (w int64, err error) {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    srcFile, err := os.Open(src)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    if err != nil {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        return</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    defer srcFile.Close()</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    dstFile, err := os.Create(dst)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    if err != nil {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        return</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    defer dstFile.Close()</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    return io.Copy(dstFile, srcFile)</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>如果 <code>defer</code> 后面一条语句干不完清理工作，也可以使用一个匿名函数：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">defer func(){</span></span>
+<span class="line"><span style="color:#A6ACCD;">    ...</span></span>
+<span class="line"><span style="color:#A6ACCD;">}()</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>注意，<code>defer</code> 语句是在 <code>return</code> 之后执行的：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">func test() (result int) {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    defer func() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        result = 12</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return 10</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(test())     // 12</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p><strong>panic 和 recover</strong></p><p><code>panic()</code> 函数用于抛出异常，<code>recover()</code> 函数用于捕获异常，这两个函数的原型如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">func panic(interface{})</span></span>
+<span class="line"><span style="color:#A6ACCD;">func recover() interface{}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>在一个函数中调用 <code>panic()</code> 时，正常的函数执行流程将立即终止，但函数中之前使用 defer 关键字延迟执行的语句将正常展开执行，之后该函数将返回到调用函数，并导致逐层向上执行 <code>panic()</code> 流程，直至所属的 <code>goroutine</code> 中所有正在执行的函数被终止。错误信息将被报告，包括在调用 <code>panic()</code> 函数时传入的参数，这个过程称为错误流程处理。</p><p><code>panic()</code> 接受一个 <code>interface{}</code> 参数，可支持任意类型，例如：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">panic(404)</span></span>
+<span class="line"><span style="color:#A6ACCD;">panic(&quot;network broken&quot;)</span></span>
+<span class="line"><span style="color:#A6ACCD;">panic(Error(&quot;file not exists&quot;))</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>在 <code>defer</code> 语句中，可以使用 <code>recover()</code> 终止错误处理流程，这样可以避免异常向上传递，但要注意 <code>recover()</code> 之后，程序不会再回到 <code>panic()</code> 那里，函数仍在 <code>defer</code> 之后返回。</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">func foo() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    panic(errors.New(&quot;i&#39;m a bug&quot;))</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func test() (result int) {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    defer func() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        if r := recover(); r != nil {</span></span>
+<span class="line"><span style="color:#A6ACCD;">            err := r.(error)</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Println(&quot;Cache Exception:&quot;, err)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        }</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    foo()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return 10</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(test())     // 0</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h1 id="go-面向对象" tabindex="-1">Go 面向对象 <a class="header-anchor" href="#go-面向对象" aria-hidden="true">#</a></h1><h2 id="自定义类型及结构体" tabindex="-1">自定义类型及结构体 <a class="header-anchor" href="#自定义类型及结构体" aria-hidden="true">#</a></h2><p><strong>自定义类型</strong></p><p>Go 语言的中结构体 <code>struct</code> 与 C++、JAVA 中的类 <code>class</code> 相似，但 Go 放弃了传统面向对象的诸多特性，只保留了组合。</p><ul><li>type typeName typeSpecification</li></ul><p>其中，<code>typeName</code> 可以是一个包或者函数内唯一合法的 Go 标示符。<code>typeSpecification</code> 可以是任何内置的类型，一个接口或者是一个结构体。所谓结构体，它的字段是由其他类型或者接口组成。例如我们通过结构体定义了一下类型：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">type ColorPoint struct {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    color.Color     // 匿名字段(嵌入)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    x, y int        // 具名字段(聚合)</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>以上代码我们通过结构体自定义了类型 <code>ColorPoint</code>，结构体中 <code>color.Color</code> 字段是 <code>color</code> 包的类型 <code>Color</code>，这个字段没有名字，所以被称为匿名的，也是嵌入字段。字段 <code>x</code> 和 <code>y</code> 是有变量名的，所以被称为具名字段。假如我们创建了类型 ColorPoint 的一个值 <code>point</code>（通过语法：<code>point := ColorPoint{}</code> 创建），那么这些字段可以通过 <code>point.Color</code>、<code>point.x</code>、<code>point.y</code> 访问。其他面向对象语言中的&quot;类 (<code>class</code>)&quot;、&quot;对象 (<code>object</code>)&quot;、&quot;实例 (<code>instance</code>)&quot;在 Go 语言中我们完全避开使用。相反的我们使用&quot;类型 (<code>type</code>)&quot;和其对应的&quot;值&quot;，其中自定义类型的值可以包含方法。</p><p>定义了结构体后如何创建并初始化一个对象实例呢？Go 语言支持以下几种方法进行实现：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">//先定义一个结构体Man</span></span>
+<span class="line"><span style="color:#A6ACCD;">type Man struct{</span></span>
+<span class="line"><span style="color:#A6ACCD;">    name string</span></span>
+<span class="line"><span style="color:#A6ACCD;">    age int</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;">//对象创建与初始化</span></span>
+<span class="line"><span style="color:#A6ACCD;">man := new(Man)</span></span>
+<span class="line"><span style="color:#A6ACCD;">man := &amp;Man{}</span></span>
+<span class="line"><span style="color:#A6ACCD;">man := &amp;Man{&quot;Tom&quot;, 18}</span></span>
+<span class="line"><span style="color:#A6ACCD;">man := &amp;Man{name: &quot;Tom&quot;, age: 18}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>为了更加方便的创建对象，我们一般会使用一个全局函数来完成对象的创建，这和传统的“构造函数”类似。</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">func NewMan(name string, age int) *Man {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return &amp;Man{name, age}</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h2 id="方法" tabindex="-1">方法 <a class="header-anchor" href="#方法" aria-hidden="true">#</a></h2><p>方法是作用在自定义类型上的一类特殊函数，通常自定义类型的值会被传递给该函数，该值可能是以指针或者复制值的形式传递。定义方法和定义函数几乎相同，只是需要在 <code>func</code> 关键字和方法名之间必须写上接接受者。例如我们给类型 <code>Count</code> 定义了以下方法：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">type Count int</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func (count *Count) Increment() { *count++ }  // 接受者是一个 `Count` 类型的指针</span></span>
+<span class="line"><span style="color:#A6ACCD;">func (count *Count) Decrement() { *count-- }</span></span>
+<span class="line"><span style="color:#A6ACCD;">func (count Count) IsZero() bool { return count == 0 }</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>以上代码中，我们在内置类型 <code>int</code> 的基础上定义了自定义类型 <code>Count</code>，然后给该类型添加了 <code>Increment()</code>、<code>Decrement()</code> 和 <code>IsZero()</code> 方法，其中前两者的接受者为 <code>Count</code> 类型的指针，后一个方法接收 <code>Count</code> 类型的值。</p><p>类型的方法集是指可以被该类型的值调用的所有方法的集合。</p><p>一个指向自定义类型的值的指针，它的方法集由该类型定义的所有方法组成，无论这些方法接受的是一个值还是一个指针。如果在指针上调用一个接受值的方法，Go 语言会聪明地将该指针解引用。</p><p>一个自定义类型值的方法集合则由该类型定义的接收者为值类型的方法组成，但是不包括那些接收者类型为指针的方法。</p><p>其实这些限制 Go 语言帮我们解决的非常好，结果就是我们可以在值类型上调用接收者为指针的方法。假如我们只有一个值，仍然可以调用一个接收者为指针类型的方法，这是因为 Go 语言会自动获取值的地址传递给该方法，前提是该值是可寻址的。</p><p>在以上定义的类型 <code>Count</code> 中，<code>*Count</code> 方法集是 <code>Increment()</code>, <code>Decrement()</code> 和 <code>IsZero()</code>，<code>Count</code> 的值的方法集是 <code>IsZero()</code>。但是因为 <code>Count</code> 类型的是可寻址的，所以我们可以使用 <code>Count</code> 的值调用全部的方法。</p><p>另外如果结构体的字段也有方法，我们也可以直接通过结构体访问字段中的方法。</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">import &quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">type Count int // 创建自定义类型 Count</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func (count *Count) Increment()  { *count++ } // Count类型的方法</span></span>
+<span class="line"><span style="color:#A6ACCD;">func (count *Count) Decrement()  { *count-- }</span></span>
+<span class="line"><span style="color:#A6ACCD;">func (count Count) IsZero() bool { return count == 0 }</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">type Part struct { // 基于结构体创建自定义类型 Part</span></span>
+<span class="line"><span style="color:#A6ACCD;">    stat  string</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Count // 匿名字段</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func (part Part) IsZero() bool { // 覆盖了匿名字段Count的IsZero()方法</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return part.Count.IsZero() &amp;&amp; part.stat == &quot;&quot; // 调用了匿名字段的方法</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func (part Part) String() string { // 定义String()方法，自定义了格式化指令%v的输出</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return fmt.Sprintf(&quot;&lt;&lt;%s, %d&gt;&gt;&quot;, part.stat, part.Count)</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    var i Count = -1</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;Start \&quot;Count\&quot; test:\nOrigin value of count: %d\n&quot;, i)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    i.Increment()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;Value of count after increment: %d\n&quot;, i)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;Count is zero t/f? : %t\n\n&quot;, i.IsZero())</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;Start: \&quot;Part\&quot; test:&quot;)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    part := Part{&quot;232&quot;, 0}</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;Part: %v\n&quot;, part)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;Part is zero t/f? : %t\n&quot;, part.IsZero())</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;Count in Part is zero t/f?: %t\n&quot;, part.Count.IsZero()) // 尽管覆盖了匿名字段的方法，单还是可以访问</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>执行代码，输出如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">$ go run main.go</span></span>
+<span class="line"><span style="color:#A6ACCD;">Start &quot;Count&quot; test:</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">Origin value of count: -1</span></span>
+<span class="line"><span style="color:#A6ACCD;">Value of count after increment: 0</span></span>
+<span class="line"><span style="color:#A6ACCD;">Count is zero t/f? : true</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">Start: &quot;Part&quot; test:</span></span>
+<span class="line"><span style="color:#A6ACCD;">Part: &lt;&lt;232, 0&gt;&gt;</span></span>
+<span class="line"><span style="color:#A6ACCD;">Part is zero t/f? : false</span></span>
+<span class="line"><span style="color:#A6ACCD;">Count in Part is zero t/f?: true</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h2 id="组合" tabindex="-1">组合 <a class="header-anchor" href="#组合" aria-hidden="true">#</a></h2><p>Go 语言虽然抛弃了继承，但是却提供了一个更加方便的组合特性。相对于继承的编译期确定实现，组合的运行态指定实现，更加灵活。下面通过一段代码来了解组合的基本属性以及它与继承的不同之处。</p><p>先定义一个结构体 <code>Base</code>, 并为它添加两个方法 <code>Foo()</code> 和 <code>Bar()</code>：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">type Base struct{</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Name string</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func (b *Base) Foo() {...}</span></span>
+<span class="line"><span style="color:#A6ACCD;">func (b *Base) Bar() {...}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">type Seed struct {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Base</span></span>
+<span class="line"><span style="color:#A6ACCD;">    ...</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func (s *Seed) Foo() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    s.Base.Foo()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    s.Bar()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    ...</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>上面代码先定义了一个 Base 类，然后定义了一个 Seed 类。Seed 类“继承”了 Base 类的所有成员属性和方法并重写了 <code>Foo()</code> 方法。同时在重写 <code>Foo()</code> 方法时调用了 Base 类的 <code>Foo()</code> 方法和 <code>Bar()</code> 方法。需要注意的是，若此时 Seed 的对象通过 <code>s.Foo()</code> 调用 <code>Foo()</code> 方法时，实际调用的是 Seed 重写过后的 <code>Foo()</code> 方法，而不是基类 Base 的 <code>Foo()</code> 方法，若想调用 Base 类的 <code>Foo()</code> 方法则要使用 <code>s.Base.Foo</code>，而调用没有重写的 <code>Bar()</code> 方法时，使用 <code>s.Bar()</code> 和 <code>s.Base.Bar()</code> 效果是一样的。</p><h2 id="接口" tabindex="-1">接口 <a class="header-anchor" href="#接口" aria-hidden="true">#</a></h2><p>在 Go 中，接口是一组方法签名。当一个类型为接口中的所有方法提供定义时，它被称为实现该接口。它与 oop 非常相似。接口指定类型应具有的方法，类型决定如何实现这些方法。</p><p><strong>接口基础</strong></p><p>之所以说 Go 语言的面向对象很灵活，很大一部分原因是由于接口的存在。接口是一个自定义类型，它声明了一个或者多个方法签名，任何实现了这些方法的类型都实现这个接口。<code>infterface{}</code> 类型是声明了空方法集的接口类型。任何一个值都满足 <code>interface{}</code> 类型，也就是说如果一个函数或者方法接收 <code>interface{}</code> 类型的参数，那么任意类型的参数都可以传递给该函数。接口是完全抽象的，不能实例化。接口能存储任何实现了该接口的类型。</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">import &quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">type Human struct { // 结构体</span></span>
+<span class="line"><span style="color:#A6ACCD;">    name  string</span></span>
+<span class="line"><span style="color:#A6ACCD;">    age   int</span></span>
+<span class="line"><span style="color:#A6ACCD;">    phone string</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">//Human实现SayHi方法</span></span>
+<span class="line"><span style="color:#A6ACCD;">func (h Human) SayHi() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;Hi, I am %s you can call me on %s\n&quot;, h.name, h.phone)</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">//Human实现Sing方法</span></span>
+<span class="line"><span style="color:#A6ACCD;">func (h Human) Sing(lyrics string) {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;La la la la...&quot;, lyrics)</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">type Student struct {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Human  //匿名字段</span></span>
+<span class="line"><span style="color:#A6ACCD;">    school string</span></span>
+<span class="line"><span style="color:#A6ACCD;">    loan   float32</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">type Employee struct {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Human   //匿名字段</span></span>
+<span class="line"><span style="color:#A6ACCD;">    company string</span></span>
+<span class="line"><span style="color:#A6ACCD;">    money   float32</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">// Employee重载Human的SayHi方法</span></span>
+<span class="line"><span style="color:#A6ACCD;">func (e Employee) SayHi() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Printf(&quot;Hi, I am %s, I work at %s. Call me on %s\n&quot;, e.name,</span></span>
+<span class="line"><span style="color:#A6ACCD;">        e.company, e.phone)</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">// Interface Men被Human,Student和Employee实现</span></span>
+<span class="line"><span style="color:#A6ACCD;">// 因为这三个类型都实现了这两个方法</span></span>
+<span class="line"><span style="color:#A6ACCD;">type Men interface {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    SayHi()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Sing(lyrics string)</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    mike := Student{Human{&quot;Mike&quot;, 25, &quot;222-222-XXX&quot;}, &quot;MIT&quot;, 0.00}</span></span>
+<span class="line"><span style="color:#A6ACCD;">    paul := Student{Human{&quot;Paul&quot;, 26, &quot;111-222-XXX&quot;}, &quot;Harvard&quot;, 100}</span></span>
+<span class="line"><span style="color:#A6ACCD;">    sam := Employee{Human{&quot;Sam&quot;, 36, &quot;444-222-XXX&quot;}, &quot;Golang Inc.&quot;, 1000}</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Tom := Employee{Human{&quot;Tom&quot;, 37, &quot;222-444-XXX&quot;}, &quot;Things Ltd.&quot;, 5000}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    //定义Men类型的变量i</span></span>
+<span class="line"><span style="color:#A6ACCD;">    var i Men</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    //i能存储Student</span></span>
+<span class="line"><span style="color:#A6ACCD;">    i = mike</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;This is Mike, a Student:&quot;)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    i.SayHi()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    i.Sing(&quot;November rain&quot;)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    //i也能存储Employee</span></span>
+<span class="line"><span style="color:#A6ACCD;">    i = Tom</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;This is Tom, an Employee:&quot;)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    i.SayHi()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    i.Sing(&quot;Born to be wild&quot;)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    //定义了slice Men</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(&quot;Let&#39;s use a slice of Men and see what happens&quot;)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    x := make([]Men, 3)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    //这三个都是不同类型的元素，但是他们实现了interface同一个接口</span></span>
+<span class="line"><span style="color:#A6ACCD;">    x[0], x[1], x[2] = paul, sam, mike</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    for _, value := range x {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        value.SayHi()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>以上代码中，接口类型声明的变量能存储任何实现了该接口的类型的值。运行代码，输出如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">$ go run main.go</span></span>
+<span class="line"><span style="color:#A6ACCD;">This is Mike, a Student:</span></span>
+<span class="line"><span style="color:#A6ACCD;">Hi, I am Mike you can call me on 222-222-XXX</span></span>
+<span class="line"><span style="color:#A6ACCD;">La la la la... November rain</span></span>
+<span class="line"><span style="color:#A6ACCD;">This is Tom, an Employee:</span></span>
+<span class="line"><span style="color:#A6ACCD;">Hi, I am Tom, I work at Things Ltd.. Call me on 222-444-XXX</span></span>
+<span class="line"><span style="color:#A6ACCD;">La la la la... Born to be wild</span></span>
+<span class="line"><span style="color:#A6ACCD;">Let&#39;s use a slice of Men and see what happens</span></span>
+<span class="line"><span style="color:#A6ACCD;">Hi, I am Paul you can call me on 111-222-XXX</span></span>
+<span class="line"><span style="color:#A6ACCD;">Hi, I am Sam, I work at Golang Inc.. Call me on 444-222-XXX</span></span>
+<span class="line"><span style="color:#A6ACCD;">Hi, I am Mike you can call me on 222-222-XXX</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p><strong>接口变量值的类型</strong></p><p>接口类型声明的变量里能存储任何实现了该接口的类型的值。有的时候我们需要知道这个变量里的值的类型，那么需要怎么做呢？可以使用类型断言，或者是 switch 类型判断分支。</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">import (</span></span>
+<span class="line"><span style="color:#A6ACCD;">    &quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">    &quot;strconv&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">type Element interface{}</span></span>
+<span class="line"><span style="color:#A6ACCD;">type List []Element</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">type Person struct {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    name string</span></span>
+<span class="line"><span style="color:#A6ACCD;">    age  int</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">// 实现了fmt.Stringer接口</span></span>
+<span class="line"><span style="color:#A6ACCD;">func (p Person) String() string {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    return &quot;(name: &quot; + p.name + &quot; - age: &quot; + strconv.Itoa(p.age) + &quot; years)&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    list := make(List, 3)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    list[0] = 1       //an int</span></span>
+<span class="line"><span style="color:#A6ACCD;">    list[1] = &quot;Hello&quot; //a string</span></span>
+<span class="line"><span style="color:#A6ACCD;">    list[2] = Person{&quot;Dennis&quot;, 70}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    for index, element := range list {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        switch value := element.(type) { // switch类型判断开关</span></span>
+<span class="line"><span style="color:#A6ACCD;">        case int:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Printf(&quot;list[%d] is an int and its value is %d\n&quot;, index, value)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        case string:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Printf(&quot;list[%d] is a string and its value is %s\n&quot;, index, value)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        case Person:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Printf(&quot;list[%d] is a Person and its value is %s\n&quot;, index, value)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        default:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Println(&quot;list[%d] is of a different type&quot;, index)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        }</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>运行结果：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">$ go run main.go</span></span>
+<span class="line"><span style="color:#A6ACCD;">list[0] is an int and its value is 1</span></span>
+<span class="line"><span style="color:#A6ACCD;">list[1] is a string and its value is Hello</span></span>
+<span class="line"><span style="color:#A6ACCD;">list[2] is a Person and its value is (name: Dennis - age: 70 years)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p><strong>嵌入 interface</strong></p><p>在结构体中可以嵌入匿名字段，其实在接口里也可以再嵌入接口。如果一个 interface1 作为 interface2 的一个嵌入字段，那么 interface2 隐式的包含了 interface1 里的方法。如下例子中，Interface2 包含了 Interface1 的所有方法。</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">type Interface1 interface {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Send()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Receive()</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">type Interface2 interface {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Interface1</span></span>
+<span class="line"><span style="color:#A6ACCD;">    Close()</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h1 id="go-并发编程" tabindex="-1">Go 并发编程 <a class="header-anchor" href="#go-并发编程" aria-hidden="true">#</a></h1><h2 id="并发与并行" tabindex="-1">并发与并行 <a class="header-anchor" href="#并发与并行" aria-hidden="true">#</a></h2><p><strong>并发</strong>指在同一时刻只能有一条指令执行，但多个进程指令被快速的轮换执行，使得在宏观上具有多个进程同时执行的效果，但在微观上并不是同时执行的，只是把时间分成若干段，通过 CPU 时间片轮转使多个进程快速交替的执行。</p><p>而并行的关键是你有同时处理多个任务的能力。</p><p>并发和并行都可以是很多个线程，就看这些线程能不能同时被（多个）CPU 执行，如果可以就说明是并行，而并发是多个线程被（一个）CPU 轮流切换着执行。</p><h2 id="协程" tabindex="-1">协程 <a class="header-anchor" href="#协程" aria-hidden="true">#</a></h2><p>协程也叫轻量级线程。与传统的进程和线程相比，协程最大的优点就在于其足够“轻”，操作系统可以轻松创建上百万个协程而不会导致系统资源枯竭，而线程和进程通常最多不过近万个。而多数语言在语法层面上是不支持协程的，一般都是通过库的方式进行支持，但库的支持方式和功能不够完善，经常会引发阻塞等一系列问题，而 Go 语言在语法层面上支持协程，也叫 <code>goroutine</code>。这让协程变得非常简单，让轻量级线程的切换管理不再依赖于系统的进程和线程，也不依赖 CPU 的数量。</p><h2 id="goroutine" tabindex="-1">goroutine <a class="header-anchor" href="#goroutine" aria-hidden="true">#</a></h2><p><code>goroutine</code> 是 Go 语言并行设计的核心。<code>goroutine</code> 是一种比线程更轻量的实现，十几个 <code>goroutine</code> 可能在底层就是几个线程。 不同的是，Golang 在 runtime、系统调用等多方面对 <code>goroutine</code> 调度进行了封装和处理，当遇到长时间执行或者进行系统调用时，会主动把当前 <code>goroutine</code> 的 CPU (P) 转让出去，让其他 <code>goroutine</code> 能被调度并执行，也就是 Golang 从语言层面支持了协程。要使用 <code>goroutine</code> 只需要简单的在需要执行的函数前添加 <code>go</code> 关键字即可。当执行 <code>goroutine</code> 时候，Go 语言立即返回，接着执行剩余的代码，<code>goroutine</code> 不阻塞主线程。下面我们通过一小段代码来讲解 go 的使用：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">//首先我们先实现一个 Add()函数</span></span>
+<span class="line"><span style="color:#A6ACCD;">func Add(a, b int) {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    c := a + b</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(c)</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">go Add(1, 2) //使用go关键字让函数并发执行</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>Go 的并发执行就是这么简单，当在一个函数前加上 <code>go</code> 关键字，该函数就会在一个新的 goroutine 中并发执行，当该函数执行完毕时，这个新的 goroutine 也就结束了。不过需要注意的是，如果该函数具有返回值，那么返回值会被丢弃。所以什么时候用 <code>go</code> 还需要酌情考虑。</p><p>接着我们通过一个案例来体验一下 Go 的并发到底是怎么样的。</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">import &quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func Add(a, b int) {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    c := a + b</span></span>
+<span class="line"><span style="color:#A6ACCD;">    fmt.Println(c)</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    for i := 0; i &lt; 10; i++ {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        go Add(i, i)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>执行以上代码会发现屏幕上什么都没有，但程序并不会报错，这是什么原因呢？原来当主程序执行到 for 循环时启动了 10 个 <code>goroutine</code>，然后主程序就退出了，而启动的 10 个 <code>goroutine</code> 还没来得及执行 <code>Add()</code> 函数，所以程序不会有任何输出。也就是说主 <code>goroutine</code> 并不会等待其他 <code>goroutine</code> 执行结束。那么如何解决这个问题呢？Go 语言提供的通道（<code>channel</code>）就是专门解决并发通信问题的。</p><h2 id="channel" tabindex="-1">channel <a class="header-anchor" href="#channel" aria-hidden="true">#</a></h2><p><code>channel</code> 是 <code>goroutine</code> 之间互相通讯的东西。类似我们 Unix 上的管道（可以在进程间传递消息），用来 <code>goroutine</code> 之间发消息和接收消息。其实，就是在做 <code>goroutine</code> 之间的内存共享。<code>channel</code> 是类型相关的，也就是说一个 <code>channel</code> 只能传递一种类型的值，这个类型需要在 <code>channel</code> 声明时指定。</p><p><strong>声明与初始化</strong></p><p><code>channel</code> 的一般声明形式：<code>var chanName chan ElementType</code>。</p><p>与普通变量的声明不同的是在类型前面加了 <code>chan</code> 关键字，<code>ElementType</code> 则指定了这个 <code>channel</code> 所能传递的元素类型。示例：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">var a chan int //声明一个传递元素类型为int的channel</span></span>
+<span class="line"><span style="color:#A6ACCD;">var b chan float64</span></span>
+<span class="line"><span style="color:#A6ACCD;">var c chan string</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>初始化一个 <code>channel</code> 也非常简单，直接使用 Go 语言内置的 <code>make()</code> 函数，示例：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">a := make(chan int) //初始化一个int型的名为a的channel</span></span>
+<span class="line"><span style="color:#A6ACCD;">b := make(chan float64)</span></span>
+<span class="line"><span style="color:#A6ACCD;">c := make(chan string)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p><code>channel</code> 最频繁的操作就是写入和读取，这两个操作也非常简单，示例：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">a := make(chan int)</span></span>
+<span class="line"><span style="color:#A6ACCD;">a &lt;- 1  //将数据写入channel</span></span>
+<span class="line"><span style="color:#A6ACCD;">z := &lt;-a  //从channel中读取数据</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p><strong>channel 的关闭</strong></p><p>channel 的关闭非常简单，使用 Go 语言内置的 close() 函数即可关闭 channel，示例：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">ch := make(chan int)</span></span>
+<span class="line"><span style="color:#A6ACCD;">close(ch)</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>关闭了 channel 后如何查看 channel 是否关闭成功了呢？很简单，我们可以在读取 channel 时采用多重返回值的方式，示例：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">x, ok := &lt;-ch</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>通过查看第二个返回值的 bool 值即可判断 channel 是否关闭，若为 false 则表示 channel 被关闭，反之则没有关闭。</p><h2 id="select" tabindex="-1">select <a class="header-anchor" href="#select" aria-hidden="true">#</a></h2><p><code>select</code> 用于处理异步 IO 问题，它的语法与 <code>switch</code> 非常类似。由 <code>select</code> 开始一个新的选择块，每个选择条件由 <code>case</code> 语句来描述，并且每个 <code>case</code> 语句里必须是一个 <code>channel</code> 操作。它既可以用于 <code>channel</code> 的数据接收，也可以用于 <code>channel</code> 的数据发送。如果 <code>select</code> 的多个分支都满足条件，则会随机的选取其中一个满足条件的分支。</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">package main</span></span>
+<span class="line"><span style="color:#A6ACCD;">import &quot;time&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">import &quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">func main() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    c1 := make(chan string)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    c2 := make(chan string)</span></span>
+<span class="line"><span style="color:#A6ACCD;">    go func() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        time.Sleep(time.Second * 1)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        c1 &lt;- &quot;one&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    go func() {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        time.Sleep(time.Second * 2)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        c2 &lt;- &quot;two&quot;</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }()</span></span>
+<span class="line"><span style="color:#A6ACCD;">    for i := 0; i &lt; 2; i++ {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        select {</span></span>
+<span class="line"><span style="color:#A6ACCD;">        case msg1 := &lt;-c1:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Println(&quot;received&quot;, msg1)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        case msg2 := &lt;-c2:</span></span>
+<span class="line"><span style="color:#A6ACCD;">            fmt.Println(&quot;received&quot;, msg2)</span></span>
+<span class="line"><span style="color:#A6ACCD;">        }</span></span>
+<span class="line"><span style="color:#A6ACCD;">    }</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>以上代码先初始化两个 <code>channel</code> c1 和 c2，然后开启两个 <code>goroutine</code> 分别往 c1 和 c2 写入数据，再通过 <code>select</code> 监听两个 <code>channel</code>，从中读取数据并输出。</p><p>运行结果如下：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">$ go run main.go</span></span>
+<span class="line"><span style="color:#A6ACCD;">received one</span></span>
+<span class="line"><span style="color:#A6ACCD;">received two</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><h2 id="超时机制" tabindex="-1">超时机制 <a class="header-anchor" href="#超时机制" aria-hidden="true">#</a></h2><p><code>channel</code> 的读写操作非常简单，只需要通过 <code>&lt;-</code> 操作符即可实现，但是 <code>channel</code> 的使用不当却会带来大麻烦。我们先来看之前的一段代码：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">a := make(chan int)</span></span>
+<span class="line"><span style="color:#A6ACCD;">a &lt;- 1</span></span>
+<span class="line"><span style="color:#A6ACCD;">z := &lt;-a</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>观察上面三行代码，第 2 行往 <code>channel</code> 内写入了数据，第 3 行从 <code>channel</code> 中读取了数据，如果程序运行正常当然不会出什么问题，可如果第二行数据写入失败，或者 <code>channel</code> 中没有数据，那么第 3 行代码会因为永远无法从 <code>a</code> 中读取到数据而一直处于阻塞状态。相反的，如果 <code>channel</code> 中的数据一直没有被读取，那么写入操作也会一直处于阻塞状态。如果不正确处理这个情况，很可能会导致整个 <code>goroutine</code> 锁死，这就是超时问题。Go 语言没有针对超时提供专门的处理机制，但是我们却可以利用 <code>select</code> 来巧妙地实现超时处理机制，下面看一个示例：</p><div class="language-"><button class="copy"></button><span class="lang"></span><pre><code><span class="line"><span style="color:#A6ACCD;">t := make(chan bool)</span></span>
+<span class="line"><span style="color:#A6ACCD;">go func {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    time.Sleep(1e9) //等待1秒</span></span>
+<span class="line"><span style="color:#A6ACCD;">    t &lt;- true</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">select {</span></span>
+<span class="line"><span style="color:#A6ACCD;">    case &lt;-ch:  //从ch中读取数据</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span>
+<span class="line"><span style="color:#A6ACCD;">    case &lt;-t:  //如果1秒后没有从ch中读取到数据，那么从t中读取，并进行下一步操作</span></span>
+<span class="line"><span style="color:#A6ACCD;">}</span></span>
+<span class="line"><span style="color:#A6ACCD;"></span></span></code></pre></div><p>这样的方法就可以让程序在等待 1 秒后继续执行，而不会因为 ch 读取等待而导致程序停滞，从而巧妙地实现了超时处理机制，这种方法不仅简单，在实际项目开发中也是非常实用的。</p></div></div></main><!--[--><!--]--><footer class="VPDocFooter" data-v-37ebe389 data-v-a54a85bd><!----><div class="prev-next" data-v-a54a85bd><div class="pager" data-v-a54a85bd><!----></div><div class="pager" data-v-a54a85bd><a class="pager-link next" href="/golang/" data-v-a54a85bd><span class="desc" data-v-a54a85bd>Next page</span><span class="title" data-v-a54a85bd>Golang</span></a></div></div></footer><!--[--><!--]--></div></div></div></div></div><footer class="VPFooter has-sidebar" data-v-c6a644e1 data-v-9f24cc86><div class="container" data-v-9f24cc86><p class="message" data-v-9f24cc86>Released under the MIT License.</p><p class="copyright" data-v-9f24cc86>Copyright © 2019-present ZeroDot618</p></div></footer><!--[--><!--]--></div></div>
+    <script>__VP_HASH_MAP__ = JSON.parse("{\"about_index.md\":\"485e54d2\",\"architect_index.md\":\"bad6d283\",\"architect_learn-architecture-from-zero_01-the-basic-architecture.md\":\"1604ca69\",\"architect_learn-architecture-from-zero_02-high-performance-architecture-pattern.md\":\"51d9f93c\",\"architect_learn-architecture-from-zero_03-high-availability-architecture-patterns.md\":\"2e2195c4\",\"blockchain_index.md\":\"eff7365c\",\"cloud_devops_base-on-docker-install-gitlab-ubuntu.md\":\"57aac82d\",\"cloud_devops_index.md\":\"05c0c81a\",\"cloud_docker_docker-setup-lnmp-env.md\":\"6df2d2f2\",\"cloud_docker_index.md\":\"b41f6f5e\",\"frontend_index.md\":\"552c9bc1\",\"golang_go-language-concise-course_post.md\":\"37aa6f64\",\"golang_index.md\":\"554c8f6b\",\"index.md\":\"39cf9a78\",\"mine_index.md\":\"4882ddd2\",\"other_hardware_index.md\":\"02033af5\",\"other_sql_index.md\":\"3a22ed4a\",\"other_tools_index.md\":\"b27daf91\",\"php_index.md\":\"6a463c69\",\"python_index.md\":\"f41cd75b\"}")</script>
+    <script type="module" async src="/assets/app.4a48495f.js"></script>
+    
+  </body>
+</html>
