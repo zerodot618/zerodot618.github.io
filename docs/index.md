@@ -28,9 +28,9 @@ hero:
 #     details: cocococo
 ---
 
-<!-- <Index /> -->
+<Index />
 
 <script setup>
-// import Index from './Index.vue'
+import Index from './Index.vue'
 import './style.css'
 </script>
