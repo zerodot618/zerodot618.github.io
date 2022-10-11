@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: ZeroDot618's Blog
-  text: Only journey, one within
-  tagline: 唯一的旅程，是向内之路.
+  text: Only journey, one within.
+  tagline: 唯一的旅程，是向内之路。
   image:
     src: /img/bruce-lee.png
     alt: ZeroDot618
