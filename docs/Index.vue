@@ -1,5 +1,5 @@
 <template>
-    <img class="wechat-qrcode" src="/img/wechat-qrcode.jpg" alt="">
+    <img class="wechat-qrcode" src="/img/wechat-qrcode.jpg" alt="六码公众号">
 </template>
 
 <script setup>
