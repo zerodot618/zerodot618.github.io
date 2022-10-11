@@ -1,0 +1,1 @@
+import{_ as e,o as r,c as t,d as a}from"./app.20343ccb.js";const h=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"architect/resource/HTTP\u6587\u96C6.md"}'),l={name:"architect/resource/HTTP\u6587\u96C6.md"},c=a("",1),o=[c];function n(i,_,s,d,T,p){return r(),t("div",null,o)}const u=e(l,[["render",n]]);export{h as __pageData,u as default};

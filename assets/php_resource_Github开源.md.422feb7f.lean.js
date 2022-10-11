@@ -1,1 +1,0 @@
-import{_ as e,o as r,c as a,d as t}from"./app.56a67d48.js";const b=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"php/resource/Github\u5F00\u6E90.md"}'),n={name:"php/resource/Github\u5F00\u6E90.md"},l=t("",1),i=[l];function o(s,c,p,h,_,m){return r(),a("div",null,i)}const u=e(n,[["render",o]]);export{b as __pageData,u as default};
