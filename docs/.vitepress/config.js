@@ -75,6 +75,24 @@ module.exports = {
                     ]
                 },
             ],
+            '/architect/': [
+                {
+                    text: '架构',
+                    items: [
+                        { text: '首页', link: '/architect/' },
+                    ]
+                },
+                {
+                    text: '资源',
+                    items: [
+                        { text: '微服务', link: '/architect/resource/微服务' },
+                        { text: '缓存-队列-Redis-MongoDB', link: '/architect/resource/缓存-队列-Redis-MongoDB' },
+                        { text: 'Elasticsearch文集', link: '/architect/resource/Elasticsearch文集' },
+                        { text: 'HTTP文集', link: '/architect/resource/HTTP文集' },
+                        { text: '文集链接', link: '/architect/resource/文集链接' },
+                    ]
+                },
+            ]
         },
         socialLinks: [
             { icon: "github", link: "https://github.com/zerodot618" },
