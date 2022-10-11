@@ -83,6 +83,14 @@ module.exports = {
                     ]
                 },
                 {
+                    text: '从0开始学架构',
+                    items: [
+                        { text: '基础架构', link: '/architect/learn-architecture-from-zero/01-the-basic-architecture' },
+                        { text: '高性能架构模式', link: '/architect/learn-architecture-from-zero/02-high-performance-architecture-pattern' },
+                        { text: '高可用架构模式', link: '/architect/learn-architecture-from-zero/03-high-availability-architecture-patterns' },
+                    ]
+                },
+                {
                     text: '资源',
                     items: [
                         { text: '微服务', link: '/architect/resource/微服务' },
