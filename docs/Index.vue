@@ -12,4 +12,12 @@
     left: 36%;
     top: -176px;
 }
+
+@media screen and (max-device-width: 640px) {
+    .wechat-qrcode {
+        width: 120px;
+        position: absolute;
+        top: -30px;
+    }
+}
 </style>
