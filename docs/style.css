@@ -1,3 +1,7 @@
 .container .text {
     font-size: 40px !important;
 }
+
+.container .image-src {
+    margin-top: 66px !important;
+}
