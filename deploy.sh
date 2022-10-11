@@ -6,6 +6,10 @@ set -e
 # build
 npm run build
 
+# push the github reop
+git add -A
+git commit -m 'push document.'
+
 # navigate into the build output directory
 cd docs/.vitepress/dist
 
