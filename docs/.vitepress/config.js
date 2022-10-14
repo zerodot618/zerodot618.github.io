@@ -113,6 +113,7 @@ module.exports = {
                     items: [
                         { text: '首页', link: '/essays/books/' },
                         { text: '《奔跑吧，程序员》', link: '/essays/books/奔跑吧-程序员' },
+                        { text: '《程序员的38堂成长课》', link: '/essays/books/程序员的38堂成长课' },
                     ]
                 },
             ],
